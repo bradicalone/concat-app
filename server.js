@@ -4,7 +4,7 @@ const hbs = require('hbs');
 const fs = require('fs');
 const multer  = require('multer')
 const webp = require('webp-converter');
-const port = process.env.PORT || 3001;  // heroku sets a port called PORT or if it doesn't work uses port 3000
+const port = process.env.PORT || 8081;  // heroku sets a port called PORT or if it doesn't work uses port 3000
 const path = require('path')
 const os = require("os");
 // const concat = require('./public/concat.js');
@@ -143,7 +143,7 @@ app.get('/concat', (req, res) =>{
  
 var upload = multer({ storage: storage }).array('image');
 // var pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars
-app.post('/concat',(req, res,) => {
+app.post('/concat',(req, res) => {
 		
 	
 	upload(req, res, (err)=> {
