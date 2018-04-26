@@ -1,0 +1,31 @@
+
+#drop_zone {
+	overflow: scroll;
+	display: block;
+    height: 500px;
+    width: 100%;
+    background: #f8f8f8;
+}
+
+table, tr, .item {
+	width: 100%;
+}
+
+td {
+	height: 25px;
+}
+
+.item:nth-child(even){
+	background-color: #ecebeb;
+}
+
+.form-check-label {
+	padding: 0 !important;
+	width: 100%;
+}
+
+._new{
+	right: 0;
+	display: flex;
+	margin: 0;
+}

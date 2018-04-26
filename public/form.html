@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+		<div class="container-fluid">
+		<nav class="navbar navbar-inverse bg-inverse">
+			<a class="navbar-brand" href="#"><bold>CONCAT</bold></a>
+		</nav>
+	</div>
+	<div class="container">
+		<form method="POST" action="/concat" id="form" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-md-4">
+				<label for="text">Data</label>
+				<textarea  name="text" class="form-control get" id="text_one" rows="1"></textarea>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="exampleSelect2">Placement</label>
+				<select class="form-control get" id="picker" name="picker">
+					<option selected>Choose...</option>
+					<option value="Prepend">Prepend</option>
+					<option value="Append">Append</option>
+					<option value="Replace">Replace</option>
+					<option value="4">Set Date</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+			<div class="get col-md-4">
+				<label for="text">Data</label>
+				<textarea  name="text" class="form-control" id="text_two" rows="1"></textarea>
+			</div>
+			</div>  <!--end of row-->
+			<div class="row">
+				<div class="col-md-12">	
+					<div id="drop_zone" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" ondragend="dragend_handler(event);">
+		  				<strong>Drag one or more files to this Drop Zone ...</strong>
+
+					</div>
+				</div>
+			</div> <!--end of row-->
+			
+			<div class="form-group col-md-4">
+				<label for="exampleInputFile">File input</label>
+				<input type="file" name="image" class="get form-control-file" aria-describedby="fileHelp">
+				<small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input.</small>
+			</div>
+			<button type="submit" value="submit" class="btn btn-primary" >Submit</button><br>
+		</form>
+		<div id="original"></div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="ajax.js"></script>
+	<script type="text/javascript" src="concat.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+</body>
+</html>
