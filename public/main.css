@@ -1,36 +1,26 @@
-@font-face {
-  font-family: 'brad';
-  src:  url('img/fonts/brad.eot?r6g1g2');
-  src:  url('img/fonts/brad.eot?r6g1g2#iefix') format('embedded-opentype'),
-    url('img/fonts/brad.ttf?r6g1g2') format('truetype'),
-    url('img/fonts/brad.woff?r6g1g2') format('woff'),
-    url('img/fonts/brad.svg?r6g1g2#brad') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 
 body, html, main {
 	width: 100%;
 	height: 100%;
 }
 
-.pf {
+/*.pf {*/
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'brad' !important;
+/*  font-family: 'brad' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 1;
+  line-height: 1;*/
 
   /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
+/*  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 120px;
-}
+}*/
 
-.pffrwd-slash:before {
+/*.pffrwd-slash:before {
   content: "\e906";
   font-size: 55px;
 }
@@ -59,8 +49,66 @@ body, html, main {
 }
 .pft:before {
   content: "\e905";
+}*/
+
+
+/* === concat fonts 2 === */
+
+@font-face {
+  font-family: 'concat';
+  src:  url('img/fonts/concat.eot?3vtiph');
+  src:  url('img/fonts/concat.eot?3vtiph#iefix') format('embedded-opentype'),
+    url('img/fonts/concat.ttf?3vtiph') format('truetype'),
+    url('img/fonts/concat.woff?3vtiph') format('woff'),
+    url('img/fonts/concat.svg?3vtiph#concat') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
+.pf {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'concat' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  margin-left: 6px;
+  font-size: 120px;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pfcat:before {
+  content: "\e906";
+}
+.pfa:before {
+  content: "\e900";
+}
+.pfc-lower:before {
+  content: "\e901";
+}
+.pfc:before {
+  content: "\e902";
+}
+.pfn:before {
+  content: "\e903";
+}
+.pfo:before {
+  content: "\e904";
+}
+.pft:before {
+  content: "\e905";
+  margin-left: -6px;
+}
+
+.cat {
+	width: 188px;
+    margin-top: -75px;
+    margin-left: -116px;
+}
 .navbar {
 	height: 55px;
 }
@@ -71,17 +119,70 @@ body, html, main {
 
 
 #wrapper {
+	display: flex;
 	position: absolute;
-	-webkit-transform:translate(-50%, 50%);
-	transform: translate(-50%, 50%);
+/*	-webkit-transform:translate(-50%, 50%);
+	transform: translate(-50%, 50%);*/
 	top: 50%;
-	left: 50%;
+	left: 30%;
+	 margin-top: 23px;
+
+
+
 }
 
 .code-wrap{
 	margin-left: -20px;
+	display: flex;
 }
 
 .pf {
-	width: 20px;
+	display: inline-block;
+	position: relative;
 }
+
+button {
+	display: block;
+	margin-top: 50px;
+}
+@media screen and (max-width: 1000px){
+
+	#wrapper {
+		left: 22%;
+	}
+}
+
+
+
+@media screen and (max-width: 800px){
+	#wrapper {
+		left: 10%;
+		margin: 52px 0 10% auto;
+	}
+	.pf {
+		  font-size:90px;
+	}
+
+	.cat{
+    width: 160px;
+    margin-top: -52px;
+    margin-left: -99px;
+	}
+
+
+}
+@media screen and (max-width: 380px){
+	#wrapper {
+		/*left: 10%;*/
+		margin: 27px 0;
+	}
+	.pf {
+		  font-size:41px;
+	}
+	.cat {
+    width: 79px;
+    margin-top: -26px;
+    margin-left: -51px;
+	}
+}
+
