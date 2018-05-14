@@ -49,7 +49,8 @@ window.onload = function(){
 						setTimeout( ()=>{
 							requestAnimationFrame(function(timestamp){
 								start = timestamp || performance.now();
-							
+								wrapper.style.top = _top; //keeps static position in px instead of percentage 
+								wrapper.style.left = _left; //keeps static position in px instead of percentage 
 								iconUp(timestamp);
 							})
 						},500)
@@ -62,9 +63,6 @@ window.onload = function(){
 
 
 	function iconUp(timestamp){
-
-	wrapper.style.top = _top; //keeps static position in px instead of percentage 
-	wrapper.style.left = _left; //keeps static position in px instead of percentage 
 	const y = _top.replace(/.{2}$/, "");
 	const x = _left.replace(/.{2}$/, "");
 
@@ -76,13 +74,14 @@ window.onload = function(){
 			if(window.innerWidth < 800){
 				document.getElementById('wrapper').style.transform = `translate3d(0,${(-y * progress)}px, 0)`
 			}else{
+			//120 is the font size to begin with, 90 is the difference for size
 			for(let i of pf){
 				
-				i.style.fontSize = `${120 - (85 * progress)}px`  //120 is the font size to begin with, 90 is the difference for size
+				i.style.fontSize = `${119 - (85 * progress)}px`;  
 			}
 			Object.assign(document.querySelector('.cat').style, {
 				width: `${188 - (120 * progress)}px`,
-				marginTop: `${-75 - (-53 * progress)}px`,
+				marginTop: `${-76.2 - (-53 * progress)}px`,
 				marginLeft: `${-116 - (-70 * progress)}px`
 			})
 			document.getElementById('wrapper').style.transform = `translate3d(${-x * progress}px,${(-y * progress)}px, 0)`
@@ -90,7 +89,38 @@ window.onload = function(){
 	}
 		requestAnimationFrame(iconUp)
 	}
-}
+}  //end of window on load
+
+
+	$(document).ready(function() { 
+		var $winwidth = $(window).width();
+		$("img.background-img").attr({
+			width: $winwidth
+		});
+		$(window).bind("resize", function(){ 
+			var $winwidth = $(window).width();
+			$("img.background-img").attr({
+				width: $winwidth
+			});
+		 });
+	}); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

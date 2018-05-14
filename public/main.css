@@ -4,54 +4,15 @@ body, html, main {
 	height: 100%;
 }
 
-/*.pf {*/
-  /* use !important to prevent issues with browser extensions that change fonts */
-/*  font-family: 'brad' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;*/
-
-  /* Better Font Rendering =========== */
-/*  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 120px;
-}*/
-
-/*.pffrwd-slash:before {
-  content: "\e906";
-  font-size: 55px;
+body {
+	 overflow: hidden;
+/*	background: url("img/concat-background.png") center center no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center bottom;*/
 }
-.pflft-arrow:before {
-  content: "\e907";
-  font-size: 45px;
-}
-.pfrht-arrow:before {
-  content: "\e908";
-  font-size: 45px;
-}
-.pfa:before {
-  content: "\e900";
-}
-.pfc-lower:before {
-  content: "\e901";
-}
-.pfc:before {
-  content: "\e902";
-}
-.pfn:before {
-  content: "\e903";
-}
-.pfo:before {
-  content: "\e904";
-}
-.pft:before {
-  content: "\e905";
-}*/
-
-
 /* === concat fonts 2 === */
 
 @font-face {
@@ -104,13 +65,20 @@ body, html, main {
   margin-left: -6px;
 }
 
+.background-img {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 .cat {
 	width: 188px;
     margin-top: -75px;
     margin-left: -116px;
 }
 .navbar {
-	height: 55px;
+	height: 72px;
 }
 
 #logo {
@@ -123,18 +91,12 @@ body, html, main {
 	position: absolute;
 /*	-webkit-transform:translate(-50%, 50%);
 	transform: translate(-50%, 50%);*/
-	top: 50%;
+	top: 30%;
 	left: 30%;
 	 margin-top: 23px;
-
-
-
 }
 
-.code-wrap{
-	margin-left: -20px;
-	display: flex;
-}
+
 
 .pf {
 	display: inline-block;
