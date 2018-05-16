@@ -6,16 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 </head>
 <body>
 	<img class="background-img" src="img/concat-background.png" alt="background image index page"/>
 	<main>
 		
 			<nav class="navbar navbar-light bg-light">
-				<div class="container-fluid" style="height: 100%">
-				<a class="navbar-brand" href="https://s3-us-west-2.amazonaws.com/concat-assets/concat.svg">
-
-				</a>
+				<ul class="nav-items">
+					<li class="item">ABOUT</li>
+					<li style="padding: 10px; font-size: 24px;">|</li>
+					<li class="item">CONTACT</li>
+					<li style="padding: 10px; font-size: 24px;">|</li>
+					<li class="item">LOGIN</li>
+				</ul>
 			</nav>
 		
 				<div id="wrapper">
@@ -26,11 +30,30 @@
 					<i class="pf pfa"></i>
 					<i class="pf pft"></i>
 					<i class="pf"><img class="cat" src="img/cat.svg"/></i>
-				
 				</div>
-				
-			
-		</div>
+			<div class="popup">
+				<div class="container-fluid">
+					<form>
+					  	<div class="form-row">
+					    	<div class="col-sm-6">
+					    		<label for="email">Email</label>
+					      		<input type="text" class="form-control" placeholder="Email">
+					      		<h6>Enter login info to save work</h3>
+					  			<button type="submit" class="btn btn-primary">Sign in</button>
+					    	</div>
+					    	<div class="col-sm-6">
+					    		<label for="password">Password</label>
+					      		<input type="text" class="form-control" placeholder="Password">
+					      		<h6>Enter without login</h3>
+					  			<a href="form.html" class="btn btn-primary" target="_blank">Enter</a>
+					    	</div>
+					  	</div>
+					</form>
+
+				</div>
+				<span id="close">Close</span>
+			</div><!--end of popup-->
+
 	</main>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="main.js"></script>
