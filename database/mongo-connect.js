@@ -1,8 +1,7 @@
 // const MongoClient = require('mongodb').MongoClient;
 const {MongoClient, ObjectID} = require('mongodb');
 
-
-MongoClient.connect('mongodb://localhost:27017/Concat', (err, client) => {
+MongoClient.connect('mongodb://admin:123Bradical123@ec2-35-162-164-234.us-west-2.compute.amazonaws.com/Concat', (err, client) => {
 	if(err){
 	return	console.log('Unable to Connect to MongoDB Server')
 	}
@@ -10,7 +9,7 @@ MongoClient.connect('mongodb://localhost:27017/Concat', (err, client) => {
 	const db = client.db('Concat')  // database reference we're looking for
 
 	db.collection('Login').insertOne({
-		text: 'test May 16th 2018',
+		text: 'test May 20th 2018',
 		completed: false
 	}, (err, result)=>{
 		if (err){
