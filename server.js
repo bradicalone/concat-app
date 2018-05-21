@@ -7,6 +7,7 @@ const webp = require('webp-converter');
 const port = process.env.PORT || 8081;  // heroku sets a port called PORT or if it doesn't work uses port 3000
 const path = require('path')
 const os = require("os");
+const mongo = require('./database/mongo-connect.js');
 // const concat = require('./public/concat.js');
 // fs.readFile('public/form.html', function(err, data){
 // 	if(err){
@@ -15,6 +16,7 @@ const os = require("os");
 // 	console.log("the data: " + data)
 // })
 
+// console.log(mongo.connection);
 
 console.log("Directory name : "+ path.dirname(__dirname + '/public'))
 console.log("Path extension: " + path.extname("server.js"))
