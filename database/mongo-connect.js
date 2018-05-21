@@ -2,28 +2,28 @@
 const {MongoClient, ObjectID} = require('mongodb');
 
 
-var config = {
-      "USER"    : "admin",           
-      "PASS"    : "123Bradical123",
-      "HOST"    : "ec2-35-162-164-234.us-west-2.compute.amazonaws.com",  
-      "PORT"    : "27017", 
-      "DATABASE" : "Concat"
-    };
+// var config = {
+//       "USER"    : "admin",           
+//       "PASS"    : "123Bradical123",
+//       "HOST"    : "ec2-35-162-164-234.us-west-2.compute.amazonaws.com",  
+//       "PORT"    : "27017", 
+//       "DATABASE" : "Concat"
+//     };
 
-var dbPath  = "mongodb://"+config.USER + ":"+
-    config.PASS + "@"+
-    config.HOST + ":"+
-    config.PORT + "/"+
-    config.DATABASE;
+// var dbPath  = "mongodb://"+config.USER + ":"+
+//     config.PASS + "@"+
+//     config.HOST + ":"+
+//     config.PORT + "/"+
+//     config.DATABASE;
 
-console.log(dbPath);
+// console.log(dbPath);
 
-MongoClient.connect(dbPath, (err, client) => {
+// MongoClient.connect(dbPath, (err, client) => {
 
 	
 
    
-// var mongo = MongoClient.connect('mongodb://admin:123Bradical123@ec2-35-162-164-234.us-west-2.compute.amazonaws.com/Concat', (err, client) => {
+ MongoClient.connect('mongodb://admin:123Bradical123@ec2-35-162-164-234.us-west-2.compute.amazonaws.com:27017/Concat', (err, client) => {
 	if(err){
 	return	console.log('Unable to Connect to MongoDB Server')
 	}
