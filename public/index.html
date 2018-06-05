@@ -12,49 +12,126 @@
 	<img class="background-img" src="img/concat-background.png" alt="background image index page"/>
 	<main>
 		
-			<nav class="navbar navbar-light bg-light">
-				<ul class="nav-items">
-					<li class="item">ABOUT</li>
-					<li style="padding: 10px; font-size: 24px;">|</li>
-					<li class="item">CONTACT</li>
-					<li style="padding: 10px; font-size: 24px;">|</li>
-					<li class="item">LOGIN</li>
-				</ul>
-			</nav>
+		<nav class="navbar navbar-light bg-light">
+			<ul class="nav-items">
+				<li class="item">ABOUT</li>
+				<li style="padding: 10px; font-size: 24px;">|</li>
+				<li class="item">CONTACT</li>
+				<li style="padding: 10px; font-size: 24px;">|</li>
+				<li class="item">REGISTER</li>
+				<li style="padding: 10px; font-size: 24px;">|</li>
+				<li class="item">LOGIN</li>
+			</ul>
+		</nav>
 		
-				<div id="wrapper">
-					<i class="pf pfc"></i>
-					<i class="pf pfo"></i>
-					<i class="pf pfn"></i>
-					<i class="pf pfc-lower"></i>
-					<i class="pf pfa"></i>
-					<i class="pf pft"></i>
-					<i class="pf"><img class="cat" src="img/cat.svg"/></i>
-				</div>
-			<div class="popup">
-				<div class="container-fluid">
-					<form>
-					  	<div class="form-row">
-					    	<div class="col-sm-6">
-					    		<label for="email">Email</label>
-					      		<input type="text" class="form-control" placeholder="Email">
-					      		<h6>Enter login info to save work</h3>
-					  			<button type="submit" class="btn btn-primary">Sign in</button>
-					    	</div>
-					    	<div class="col-sm-6">
-					    		<label for="password">Password</label>
-					      		<input type="text" class="form-control" placeholder="Password">
-					      		<h6>Enter without login</h3>
-					  			<a href="form.html" class="btn btn-primary" target="_blank">Enter</a>
-					    	</div>
-					  	</div>
-					</form>
+		<div id="wrapper">
+			<i class="pf pfc"></i>
+			<i class="pf pfo"></i>
+			<i class="pf pfn"></i>
+			<i class="pf pfc-lower"></i>
+			<i class="pf pfa"></i>
+			<i class="pf pft"></i>
+			<i class="pf"><img class="cat" src="img/cat.svg"/></i>
+		</div>
+		<div class="popup login">
+			<img class="cat-background" src="img/form-background-wide.jpg" alt="background image for forms"/>
+			<div class="container">
+				<h2>LOGIN</h2>
+				<p>Please login the form below</p>
+				<form method="POST" id="login" action="/" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="form-group col-md-12">
+							
+							<label for="email">Email</label>
+							<input type="email" class="form-control" placeholder="Email">
+						</div>
+						<div class="form-group col-md-12">
+							<label for="password">Password</label>
+							<input type="text" type="password" class="form-control" placeholder="Password"><br>
+							<p>Enter without login</p>
+							<!-- <a href="form.html" class="btn btn-primary" target="_blank">Login</a> -->
+							<button type="submit" class="btn btn-primary">Sign in</button>
+						</div>
+					</div>
+				</form>
+			</div>
+					<span class="exit">Close</span>
+		</div>
+		<!--end of popup--> 
 
-				</div>
-				<span id="close">Close</span>
-			</div><!--end of popup-->
+		<div class="popup register">
+			<img class="cat-background" src="img/form-background.jpg" alt="background image for forms"/>
+			<div class="container">
+				
+				<div id="error"></div>
+				
+			    <h2>REGISTER</h2>
+			    <p>Please register below</p>
+				<form method="POST" id="register" action="/" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="form-group col-md-12">
+      						<label for="name">Name</label>
+      						<input name="name" type="text" class="form-control" placeholder="Enter Name">
+    					</div>
+						<div class="form-group col-md-12">
+      						<label for="email">Email</label>
+      						<input name="email" type="email" class="form-control" placeholder="Enter Email">
+    					</div>
+    					<div class="form-group col-md-12">
+      						<label for="username">Username</label>
+      						<input name="username" type="text" class="form-control" placeholder="Enter Username">
+    					</div>
+    					<div class="form-group col-md-12">
+      						<label for="password">Password</label>
+      						<input name="password" type="password" class="form-control" placeholder="Enter Password">
+    					</div>
+    					<div class="form-group col-md-12">
+      						<label for="password2">Confirm Password</label>
+      						<input name="password2" type="password" class="form-control" placeholder="Confirm Password">
+    					</div>
+    					<div class="form-group col-md-12">
+      						<label for="profileimage">Profile Image</label>
+							<input type="file" name="profileimage" class="get form-control-file">
+      						<button type="submit" name="submit" value="submit" class="btn btn-primary" >Submit</button><br>
+ 						</div>
+					</div>
+				</form>
+			</div>
+					<span class="exit">Close</span>
+		</div>
+		<!--end of popup-->
 
+		<div class="popup contact">
+			<img class="cat-background" src="img/form-background.jpg" alt="background image for forms"/>
+			<div class="container">
+				<h2>CONTACT</h2>
+				<p>Please login the from below</p>
+				<form method="POST" action="/" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="form-group col-md-12">
+							
+							<label for="name">Name</label>
+							<input type="text" class="form-control" placeholder="Name">
+						</div>
+						<div class="form-group col-md-12">
+							<label for="password">Email</label>
+							<input type="text" class="form-control" placeholder="Email"><br>
+							<!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
+						</div>
+						<div class="form-group col-md-12">
+						    <label for="message">Message</label>
+						    <textarea class="form-control" name="message" rows="3" placeholder="How am I doing"></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+					<span class="exit">Close</span>
+		</div>
 	</main>
+
+	<!-- socket io has to be realitive to server -->
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/socketio.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </body>

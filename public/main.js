@@ -1,3 +1,4 @@
+    
     let pf = document.querySelectorAll('.pf');
 	let wrapper = document.getElementById('wrapper');
 	let _left;
@@ -7,7 +8,7 @@
 		Object.assign(i.style, {
 			left: '1000px'
 		})
-	}
+	};
 
 	const easeOut = progress =>
     Math.pow(--progress, 5) + 1;
@@ -19,19 +20,18 @@ window.onload = function(){
 		let dist = -1000;
 		let dur = 500;
 
-			const logoAnimate = (timestamp) =>{
+		const logoAnimate = (timestamp) =>{
 				
-				var runtime = timestamp - start
-				var progress = Math.min(runtime / dur, 1)
-				const position = progress * dist;
-				iteration(runtime, position)
-				if(runtime < 500){
-					// console.log(window.getComputedStyle(pf[1]).getPropertyValue('transform'));
-					requestAnimationFrame(logoAnimate)
-				}
+			var runtime = timestamp - start
+			var progress = Math.min(runtime / dur, 1)
+			const position = progress * dist;
+			iteration(runtime, position)
+			if(runtime < 500){
+				requestAnimationFrame(logoAnimate)
 			}
+		}
 			requestAnimationFrame(logoAnimate)
-	}
+	};
 
 
 	function iteration(runtime,position){
@@ -53,9 +53,9 @@ window.onload = function(){
 								start = timestamp || performance.now();
 								wrapper.style.top = _top; //keeps static position in px instead of percentage 
 								wrapper.style.left = _left; //keeps static position in px instead of percentage 
-								iconUp(timestamp);
+								iconUp(timestamp, runtime);
 							})
-						},500) //half second to call the next function iconUp()
+						},1000) //half second to call the next function iconUp()
 					}
 				},100 * i)
 			})(i);
@@ -64,7 +64,7 @@ window.onload = function(){
 	shiftLetters()
 
 
-	function iconUp(timestamp){
+	function iconUp(timestamp, runtime){
 	const y = _top.replace(/.{2}$/, "");
 	const x = _left.replace(/.{2}$/, "");
 
@@ -77,19 +77,19 @@ window.onload = function(){
 			if(window.innerWidth < 800){
 				document.getElementById('wrapper').style.transform = `translate3d(0,${(-y * ease)}px, 0)`
 			}else{
-			//119 is the font size to begin with, 90 is the difference for size
+			//119 is the font size to begin with, 85 is the difference for size
 			for(let i=0;i<pf.length;i++){
 				
 				pf[i].style.fontSize = `${119 - (85 * ease)}px`;  
 			}
 				Object.assign(document.querySelector('.cat').style, {
-					width: `${188 - (120 * ease)}px`,
+					width: `${190 - (120 * ease)}px`,
 					marginTop: `${-76 - (-53 * ease)}px`,
 					marginLeft: `${-116 - (-70 * ease)}px`
 				})
 				document.getElementById('wrapper').style.transform = `translate3d(${-x * ease}px,${(-y * ease)}px, 0)`
 			}
-			requestAnimationFrame(iconUp)
+			requestAnimationFrame(iconUp,runtime)
 		} else {
 			requestAnimationFrame(function(timestamp){
 				start_nav = timestamp || performance.now();
@@ -101,36 +101,99 @@ window.onload = function(){
 
 
 function navFadeIn(timestamp){
-		let runtime = timestamp - start_nav;
-		let progress = Math.min(runtime / 500, 1);
-
-		if(runtime <= 500){
-
-			document.querySelector('.navbar').style.transform = `translateY(${72 * progress}px)`;
-		}
-		requestAnimationFrame(navFadeIn)
-};
-
-function fadeIn(timestamp){
-	
-	let runtime = timestamp - start;
+	let runtime = timestamp - start_nav;
 	let progress = Math.min(runtime / 500, 1);
-	
-	if(progress <= 1){
-		document.querySelector('.popup').style.opacity = `${1 * progress}`
-		document.querySelector('.popup').style.transform = `translate(-50%, ${80 - (30 * progress)}%)`;
+
+	if(runtime < 500){
+
+		document.querySelector('.navbar').style.transform = `translateY(${73 * progress}px)`;
 	}
-	requestAnimationFrame(fadeIn)
+	requestAnimationFrame(navFadeIn)
 };
 
 
-document.querySelectorAll('.item')[2].addEventListener('click',  function(){
-	 requestAnimationFrame(function(timestamp){
-	 	start = timestamp || performance.now();
-	 	fadeIn(timestamp)
-	 })
-});
+var form = (function(){
+	let startPos;
+	let endPos;
+	let selector;
+	let begin;
+	function formFadeIn(timestamp, opacity, opacity2){
+		
+		let runtime = timestamp - begin;
+		let progress = Math.min(runtime / 500, 1);
+		if(progress < 1){
 
+			if(arguments[2]){
+			 	document.querySelector('.' + selector).style.opacity = `${opacity2 - (opacity2 * progress.toFixed(1))}`
+			 	document.querySelector('.' + selector).style.transform = `translate(-50%, ${startPos - (endPos * progress)}px)`
+			}else{ 
+				document.querySelector('.' + selector).style.opacity = `${opacity * progress}`
+				document.querySelector('.' + selector).style.transform = `translate(-50%, ${startPos - (endPos * progress)}px)`
+			}
+			requestAnimationFrame(function(timestamp){
+				formFadeIn(timestamp, opacity, opacity2)
+			})
+		}
+	};
+
+	
+
+	var items = document.querySelectorAll('.item');
+	for(let i of items){
+		i.addEventListener('click',  function(e){
+
+			//loops through items again check if class active is current to be removed
+			for(let i of items)
+				if(i.classList.contains('active') && i != this){
+
+				i.classList.remove('active')
+
+				}else this.classList.add('active')
+
+			selector = this.innerText.toLowerCase();
+
+			document.querySelector('.' + selector).style.display = "block"
+			let y = window.getComputedStyle(document.querySelector('.' + selector), null).transformOrigin
+
+			startPos = y.replace(/^([\w\.]*)\s|px/ig, "");
+			endPos = startPos - 35
+
+			requestAnimationFrame(function(timestamp){
+				begin = timestamp || performance.now();
+				
+	 			formFadeIn(timestamp,1.1, null);
+		 	})
+
+				//filters out any current open forms 
+		 	let displayBlock = Array.prototype.filter.call(document.querySelectorAll('.popup'), (elem) =>{
+				return window.getComputedStyle(elem, null).display == 'block'
+			})
+
+		 		//removes current forms when another is clicked to open		
+			for(let i of displayBlock){
+				if(i != document.querySelector('.' + selector) ){
+					i.style.display = "none"
+				}
+			}
+		})
+	}; // End of navigation click
+
+	
+	for(let i of document.querySelectorAll('.exit')){
+		i.addEventListener('click', function(e){
+	
+			selector = e.path[1].classList[1]
+			var y = e.path[1].style.transform
+			startPos = y.replace(/^([\w\(\-\%,]+)\s|.{5}px\)/ig, "")
+			//endPos is set to negative to animate back down
+			endPos = -endPos
+			requestAnimationFrame(function(timestamp){
+				begin = timestamp || performance.now();
+	 		formFadeIn(timestamp, null, 1.1 );
+		 	})
+		})
+	}
+}());
 
 
 
@@ -148,10 +211,6 @@ document.querySelectorAll('.item')[2].addEventListener('click',  function(){
 			});
 		 });
 	}); 
-
-
-
-
 
 
 

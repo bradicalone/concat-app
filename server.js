@@ -1,13 +1,27 @@
 const express = require('express');
+const http = require('http');
+
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
+const ejs = require('ejs');
 const fs = require('fs');
 const multer  = require('multer')
 const webp = require('webp-converter');
 const port = process.env.PORT || 8081;  // heroku sets a port called PORT or if it doesn't work uses port 3000
 const path = require('path')
 const os = require("os");
-const mongo = require('./database/mongo-connect.js');
+const sessions = require("express-session");
+const passport = require("passport");
+const expressValidator = require("express-validator")
+const LocalStrategy = require("passport-local").Strategy;
+const flash = require("connect-flash");
+const mongoose = require("mongoose");
+const mongo = require("./database/mongo-connect.js");
+// const {generateMessage} = require('./routes/users.js');
+var app = express();
+app.io = require('socket.io')();
+var users = require('./routes/users')(app.io);
+
 // const concat = require('./public/concat.js');
 // fs.readFile('public/form.html', function(err, data){
 // 	if(err){
@@ -16,27 +30,26 @@ const mongo = require('./database/mongo-connect.js');
 // 	console.log("the data: " + data)
 // })
 
-// console.log(mongo.connection);
 
 console.log("Directory name : "+ path.dirname(__dirname + '/public'))
 console.log("Path extension: " + path.extname("server.js"))
 
 
 	/*<=========OSX module for info about computer==========>*/
-		// var interfaces = os.networkInterfaces();
-		// for(i in interfaces){
-		// 	console.log(interfaces[i])
-		// }
-		// console.log(Object.keys(interfaces) )
-		// var addresses = [];
-		// for (var k in interfaces) {
-		//     for (var k2 in interfaces[k]) {
-		//         var address = interfaces[k][k2];
-		//         if (address.family === 'IPv4' && !address.internal) {
-		//             addresses.push(address.address);
-		//         }
-		//     }
-		// }
+		var interfaces = os.networkInterfaces();
+		for(i in interfaces){
+			// console.log(interfaces[i])
+		}
+		console.log(Object.keys(interfaces) )
+		var addresses = [];
+		for (var k in interfaces) {
+		    for (var k2 in interfaces[k]) {
+		        var address = interfaces[k][k2];
+		        if (address.family === 'IPv4' && !address.internal) {
+		            addresses.push(address.address);
+		        }
+		    }
+		}
 
 // console.log(addresses); 
 
@@ -98,8 +111,13 @@ let p = __dirname + '/webp-start'
 	// });
 
 
+app.use(express.static(__dirname +'/public'));
 
-var app = express();
+
+//Socket IO
+var server = http.createServer(app);
+app.io.attach(server);
+
 hbs.registerPartials(__dirname + '/views/partials')
 
 // webp.webpmux_add("webp-start/meta.webp","webp-finished/meta.webp","xmp",function(status)
@@ -109,7 +127,12 @@ hbs.registerPartials(__dirname + '/views/partials')
 //   	//if exicuted unsuccessfully status will be '101' 
 //   	console.log(status);
 //   });
+// const add = multer({dest: './public/user-img'})
+// app.post('/', add.single('profileimage'), (req, res) =>{
+// 	console.log(req.body.name);
+// });
 
+//Multer storage
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/uploads')
@@ -120,9 +143,48 @@ var storage = multer.diskStorage({
   }
 })
 
-let arr = [];
+//Handle Sessions
+app.use(sessions({
+	secret: 'secret',
+	saveUninitialized: true,
+	resave: true
+}));
 
-app.set('view engine', 'hbs');
+//Passport, authentication system
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//Validator
+app.use(expressValidator({
+	errorFormatter: function(param, msg, value){
+		var namespace = param.split("."),
+		root = namespace.shift(),
+		formParam = root;
+
+		while(namespace.length){
+			formParam += '[' + namespace.shift() + ']';
+		}
+		return {
+			param : formParam,
+			msg   : msg,
+			value : value
+		}
+	}
+}));
+
+
+
+
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+	res.locals.messsages = require('express-messages')(req, res);
+	next();
+});
+
+app.engine('html', require('ejs').renderFile);
+app.set('views', path.join(__dirname +'/public'));
+app.use('/', users);
 
 // create application/json parser
 var jsonParser = bodyParser.json()
@@ -130,16 +192,18 @@ var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-app.use(express.static(__dirname +'/public'));
 
 
-app.get('/', (req, res)=>{
-	res.sendFile('index.html')
-});
 
-app.get('/concat', (req, res) =>{
-	res.sendFile(__dirname + '/public/form.html');
-});
+
+
+// app.get('/', (req, res)=>{
+// 	res.sendFile('index.html')
+// });
+
+// app.get('/concat', (req, res) =>{
+// 	res.sendFile(__dirname + '/public/form.html');
+// });
 
 
  
@@ -147,7 +211,6 @@ var upload = multer({ storage: storage }).array('image');
 // var pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars
 app.post('/concat',(req, res) => {
 		
-	
 	upload(req, res, (err)=> {
 		let text = req.body;
 		if(err){
@@ -169,6 +232,6 @@ app.post('/concat',(req, res) => {
 		
 })
 
-app.listen(port, () => {  
+server.listen(port, () => {  
   console.log('Server is up on ' + port)
 });
