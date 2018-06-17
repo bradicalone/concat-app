@@ -25,7 +25,7 @@ window.onload = function(){
 			var runtime = timestamp - start
 
 			var progress = Math.min(runtime / dur, 1)
-			
+			console.log(progress);
 			const position = progress * dist;
 			iteration(runtime, position)
 			if(runtime < 500){
@@ -55,7 +55,7 @@ window.onload = function(){
 								start = timestamp || performance.now();
 								wrapper.style.top = _top; //keeps static position in px instead of percentage 
 								wrapper.style.left = _left; //keeps static position in px instead of percentage 
-								// iconUp(timestamp, runtime);
+								iconUp(timestamp, runtime);
 							})
 						},1000) //half second to call the next function iconUp()
 					}
@@ -108,7 +108,7 @@ function navFadeIn(timestamp){
 	if(progress <= 1){
 
 		document.querySelector('.navbar').style.transform = `translateY(${73 * progress}px)`;
-		document.querySelector('.background-img').style.transform = `translateY(${-600 * progress}px)`;
+		document.querySelector('.background-img').style.transform = `translateY(${-700 * progress}px)`;
 	}
 	requestAnimationFrame(navFadeIn)
 };

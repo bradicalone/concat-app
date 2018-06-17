@@ -61,7 +61,7 @@ body, html {
 .background-img {
   width: 100%;
   position: absolute;
-  bottom: -600px;
+  bottom: -700px;
   left: 0;
 }
 
@@ -72,7 +72,7 @@ body, html {
 }
 
 .navbar {
-	/*top: -73px;*/
+	top: -73px;
 	height: 73px;
 	position: fixed;
 	width: 100%;
