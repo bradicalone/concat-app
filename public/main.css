@@ -32,6 +32,7 @@ body, html {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: black;
 }
 
 .pfcat:before {
@@ -60,7 +61,7 @@ body, html {
 .background-img {
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: -600px;
   left: 0;
 }
 
@@ -71,7 +72,7 @@ body, html {
 }
 
 .navbar {
-	top: -73px;
+	/*top: -73px;*/
 	height: 73px;
 	position: fixed;
 	width: 100%;
@@ -127,7 +128,7 @@ body, html {
 }
 
 main {
-	background-color: #ececec;
+	background: linear-gradient(#52606f, #212529);
 	overflow: scroll;
 	width: 100%;
 	height: 100%;
@@ -141,6 +142,11 @@ form {
 
 form input {
 	border: 1px solid #ffffff !important;
+}
+
+input[type="file"] {
+	border: none !important;
+	margin-bottom: 10px;
 }
 
 .popup {
@@ -173,6 +179,7 @@ form input {
 .popup.register {
 	top: 0;
 	transform: translate(-50%, 35%);
+	margin-bottom: 55px;
 }
 
 .popup h2 {
@@ -194,9 +201,54 @@ button, h6 {
 	margin-top: 5px;
 }
 
+.login-btn {
+	width: 75%;
+}
+
+.right{
+	float: right;
+}
+
+.error {
+	padding-bottom: 20px;
+	height: 0;
+	overflow: hidden;
+}
+
+.error-div {
+	background-color: white;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.clear-error {
+	justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.clear-error p {
+	position: relative;
+	top: 10px;
+	padding-right: 13px;
+	margin-left: auto;
+}
+
+.clear-error button {
+	border-radius: 30px;
+/*	box-shadow: 0px 4px rgba(0,0,0,0.2);
+   -moz-box-shadow: 0px 4px rgba(0,0,0,0.2);
+   -webkit-box-shadow: 0px 4px rgba(0,0,0,0.2);
+   -o-box-shadow: 0px 4px rgba(0,0,0,0.2);*/
+   box-shadow: 0 0 3px gray;
+   padding: 5px 12px;
+}
 
 .exit {
-    transform: translate(-50%, 50%);
+	transform: translate(-50%, 50%);
     bottom: 0px;
     left: 50%;
     font-size: 14px;
@@ -225,7 +277,18 @@ button, h6 {
 
 
 @media screen and (max-width: 768px){
+	.popup {
+		width: 80%;
+	}
+	.login-btn {
+		width: 100%;
+		margin-bottom: 20px;
+	}
 
+	.popup .col-md-6 p:nth-last-child(-n+2) {
+    font: 400 16px system-ui;
+    margin-bottom: 2px;
+}
 }
 
 @media screen and (max-width: 1000px){

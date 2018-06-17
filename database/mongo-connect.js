@@ -23,26 +23,26 @@ const {MongoClient, ObjectID} = require('mongodb');
 	
 
    
- MongoClient.connect('mongodb://admin:123Bradical123@ec2-35-162-164-234.us-west-2.compute.amazonaws.com:27017/Concat', (err, client) => {
-	if(err){
-	return	console.log('Unable to Connect to MongoDB Server')
-	}
-	console.log("Connected to MongoDB server");
-	const db = client.db('Concat')  // database reference we're looking for
+//  MongoClient.connect('mongodb://brad:123Bradical123@ec2-35-162-164-234.us-west-2.compute.amazonaws.com:27017/admin', (err, client) => {
+// 	if(err){
+// 	return	console.log('Unable to Connect to MongoDB Server')
+// 	}
+// 	console.log("Connected to MongoDB server");
+// 	const db = client.db('Concat')  // database reference we're looking for
 
-	db.collection('Login').insertOne({
-		text: 'test May 20th 2018',
-		completed: false
-	}, (err, result)=>{
-		if (err){
-			console.log("Unable to insert");
-		}
-		console.log(JSON.stringify(result.ops, undefined, 2));
-		console.log(result.ops[0]._id.getTimestamp()); //gets time of id added to database
-	})
+// 	db.collection('Login').insertOne({
+// 		text: 'test May 20th 2018',
+// 		completed: false
+// 	}, (err, result)=>{
+// 		if (err){
+// 			console.log("Unable to insert");
+// 		}
+// 		console.log(JSON.stringify(result.ops, undefined, 2));
+// 		console.log(result.ops[0]._id.getTimestamp()); //gets time of id added to database
+// 	})
 
-	client.close(); //closes connection to server
-});
+// 	client.close(); //closes connection to server
+// });
 
 
 

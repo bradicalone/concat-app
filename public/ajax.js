@@ -39,12 +39,12 @@ $(document).ready( function(){
 		for(let i of form){
 
 			console.log(i);
-			// let files = form[3].files[0];
-			let files = form[3].value;
+			let files = form[3].files[0];
+			// let files = form[3].value;
 			console.log(files)
 			let formData = new FormData();
 			formData.append("image", files)
-			// begin(formData)
+			begin(formData)
 		}
 		
 		// formData.forEach(function(ele){

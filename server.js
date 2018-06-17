@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const ejs = require('ejs');
 const fs = require('fs');
-const multer  = require('multer')
+const multer  = require('multer');
 const webp = require('webp-converter');
 const port = process.env.PORT || 8081;  // heroku sets a port called PORT or if it doesn't work uses port 3000
 const path = require('path')
@@ -15,12 +15,12 @@ const passport = require("passport");
 const expressValidator = require("express-validator")
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
-const mongoose = require("mongoose");
+// const {mongoose} = require('./models/user');
 const mongo = require("./database/mongo-connect.js");
 // const {generateMessage} = require('./routes/users.js');
 var app = express();
-app.io = require('socket.io')();
-var users = require('./routes/users')(app.io);
+var users = require('./routes/users')
+
 
 // const concat = require('./public/concat.js');
 // fs.readFile('public/form.html', function(err, data){
@@ -113,11 +113,6 @@ let p = __dirname + '/webp-start'
 
 app.use(express.static(__dirname +'/public'));
 
-
-//Socket IO
-var server = http.createServer(app);
-app.io.attach(server);
-
 hbs.registerPartials(__dirname + '/views/partials')
 
 // webp.webpmux_add("webp-start/meta.webp","webp-finished/meta.webp","xmp",function(status)
@@ -127,10 +122,7 @@ hbs.registerPartials(__dirname + '/views/partials')
 //   	//if exicuted unsuccessfully status will be '101' 
 //   	console.log(status);
 //   });
-// const add = multer({dest: './public/user-img'})
-// app.post('/', add.single('profileimage'), (req, res) =>{
-// 	console.log(req.body.name);
-// });
+
 
 //Multer storage
 var storage = multer.diskStorage({
@@ -184,19 +176,14 @@ app.use(function (req, res, next) {
 
 app.engine('html', require('ejs').renderFile);
 app.set('views', path.join(__dirname +'/public'));
-app.use('/', users);
+
 
 // create application/json parser
 var jsonParser = bodyParser.json()
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-
-
-
-
-
+app.use('/', users.router);
 // app.get('/', (req, res)=>{
 // 	res.sendFile('index.html')
 // });
@@ -232,6 +219,6 @@ app.post('/concat',(req, res) => {
 		
 })
 
-server.listen(port, () => {  
+app.listen(port, () => {  
   console.log('Server is up on ' + port)
 });

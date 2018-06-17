@@ -37,20 +37,37 @@
 			<img class="cat-background" src="img/form-background-wide.jpg" alt="background image for forms"/>
 			<div class="container">
 				<h2>LOGIN</h2>
+				
+				<div class="error">
+					<div class="clear-error">
+						<p>GO BACK</p>
+						<button class="btn" id="login-close">X</button>
+					</div>
+				</div>
 				<p>Please login the form below</p>
 				<form method="POST" id="login" action="/" enctype="multipart/form-data">
 					<div class="form-row">
 						<div class="form-group col-md-12">
 							
 							<label for="email">Email</label>
-							<input type="email" class="form-control" placeholder="Email">
+							<input name="email" type="email" class="form-control" placeholder="Email">
 						</div>
 						<div class="form-group col-md-12">
 							<label for="password">Password</label>
-							<input type="text" type="password" class="form-control" placeholder="Password"><br>
-							<p>Enter without login</p>
-							<!-- <a href="form.html" class="btn btn-primary" target="_blank">Login</a> -->
-							<button type="submit" class="btn btn-primary">Sign in</button>
+							<input name="password" type="password" type="password" class="form-control" placeholder="Password"><br>
+							<div class="row">
+								<div class="col-md-6">
+									<p>Enter without login</p>
+									<!-- <a href="form.html" class="btn btn-primary" target="_blank">Login</a> -->
+									<button type="submit" class="login-btn btn btn-primary">Sign in</button>
+								</div>
+
+								<div class="col-md-6">
+									<p>Are you a new user?</p>
+									<!-- <a href="form.html" class="btn btn-primary" target="_blank">Login</a> -->
+									<button class="login-btn btn btn-primary">Create Account</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>
@@ -63,9 +80,16 @@
 			<img class="cat-background" src="img/form-background.jpg" alt="background image for forms"/>
 			<div class="container">
 				
-				<div id="error"></div>
+				
 				
 			    <h2>REGISTER</h2>
+				
+			    <div class="error">
+			    	<div class="clear-error">
+						<p>GO BACK</p>
+						<button class="btn" id="register-close">X</button>
+					</div>
+			    </div>
 			    <p>Please register below</p>
 				<form method="POST" id="register" action="/" enctype="multipart/form-data">
 					<div class="form-row">
@@ -91,7 +115,7 @@
     					</div>
     					<div class="form-group col-md-12">
       						<label for="profileimage">Profile Image</label>
-							<input type="file" name="profileimage" class="get form-control-file">
+							<input type="file" name="profileimage" class="form-control-file" aria-describedby="fileHelp">
       						<button type="submit" name="submit" value="submit" class="btn btn-primary" >Submit</button><br>
  						</div>
 					</div>
@@ -121,6 +145,7 @@
 						<div class="form-group col-md-12">
 						    <label for="message">Message</label>
 						    <textarea class="form-control" name="message" rows="3" placeholder="How am I doing"></textarea>
+						    <button type="submit" name="submit" value="submit" class="btn btn-primary" >Submit</button><br>
 						</div>
 					</div>
 				</form>
@@ -130,9 +155,10 @@
 	</main>
 
 	<!-- socket io has to be realitive to server -->
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="js/socketio.js"></script>
+<!-- 	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/socketio.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="formData.js"></script>
 </body>
 </html>

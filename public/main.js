@@ -23,7 +23,9 @@ window.onload = function(){
 		const logoAnimate = (timestamp) =>{
 				
 			var runtime = timestamp - start
+
 			var progress = Math.min(runtime / dur, 1)
+			
 			const position = progress * dist;
 			iteration(runtime, position)
 			if(runtime < 500){
@@ -53,7 +55,7 @@ window.onload = function(){
 								start = timestamp || performance.now();
 								wrapper.style.top = _top; //keeps static position in px instead of percentage 
 								wrapper.style.left = _left; //keeps static position in px instead of percentage 
-								iconUp(timestamp, runtime);
+								// iconUp(timestamp, runtime);
 							})
 						},1000) //half second to call the next function iconUp()
 					}
@@ -103,10 +105,10 @@ window.onload = function(){
 function navFadeIn(timestamp){
 	let runtime = timestamp - start_nav;
 	let progress = Math.min(runtime / 500, 1);
-
-	if(runtime < 500){
+	if(progress <= 1){
 
 		document.querySelector('.navbar').style.transform = `translateY(${73 * progress}px)`;
+		document.querySelector('.background-img').style.transform = `translateY(${-600 * progress}px)`;
 	}
 	requestAnimationFrame(navFadeIn)
 };
@@ -164,12 +166,12 @@ var form = (function(){
 	 			formFadeIn(timestamp,1.1, null);
 		 	})
 
-				//filters out any current open forms 
+				//Filters out any current open forms 
 		 	let displayBlock = Array.prototype.filter.call(document.querySelectorAll('.popup'), (elem) =>{
 				return window.getComputedStyle(elem, null).display == 'block'
 			})
 
-		 		//removes current forms when another is clicked to open		
+		 		//Removes current forms when another is clicked to open		
 			for(let i of displayBlock){
 				if(i != document.querySelector('.' + selector) ){
 					i.style.display = "none"
@@ -179,6 +181,7 @@ var form = (function(){
 	}; // End of navigation click
 
 	
+	//Close Form
 	for(let i of document.querySelectorAll('.exit')){
 		i.addEventListener('click', function(e){
 	
