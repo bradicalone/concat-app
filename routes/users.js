@@ -5,6 +5,7 @@ const http = require('http');
 const multer  = require('multer');
 const addImage = multer({dest: './public/user-img'})
 var {User} = require('../models/user');
+var {createUser} = require('../models/user');
 var app = express();
 
 //Multer storage
@@ -32,7 +33,6 @@ router.get('/concat', (req, res) =>{
 	// res.sendFile(__dirname + '/views/form.html');
 
 	res.render('form.html')
-	console.log('hry');
 	
 });
 
@@ -57,32 +57,30 @@ app.post('/concat',(req, res) => {
 			console.log(req.file);
 			if(req.file || req.body){
 
-				var client = new User({
+				console.log("uploading file....");
+
+				var newUser = new User({
 					name:  value[0],
 					email: value[1],
 					username:  value[2],
 					password: value[3],
-					profileimage: req.file
-				})
-				console.log("uploading file....");
-				var profileimage = req.file
-				// res.end('all done')
+					profileimage: req.file.filename
+				});
+			
+				createUser(newUser, function(err, user){
+					if(err) throw err;
+					console.log(user)
+				});
+
+				
+				
 			}else{
 				console.log('no file uploaded');
 				var profileimage = 'img/two.png'
 			}
-
-			// // Form Validator 
-			// //name is the field name, then the message for it. 
-			// //notEmpty() checks if field is empty
-			// req.checkBody('name', 'Name field is required').notEmpty();
-			// req.checkBody('email', 'Email field is required').notEmpty();
-			// req.checkBody('email', 'Email is not valid').isEmail();
-			// req.checkBody('username', 'Username field is required').notEmpty();
-			// req.checkBody('password', 'Password field is required').notEmpty();
-			// req.checkBody('password2', 'Password2 field is required').equals(req.body.password);
-
-			// // Check Errors
+				// res.location('/concat');
+				// res.redirect('/concat');
+					res.send(req.file)
 			// let errors = req.validationErrors()
 			
 			// if(errors){

@@ -1,4 +1,8 @@
 var start;
+
+const easeout = progress =>
+    Math.pow(--progress, 5) + 1;
+
 var forms = (function(){
 	var _this;
 	var form = document.getElementsByTagName('form');
@@ -19,13 +23,13 @@ var forms = (function(){
 				var data = {
 					errors: [],
 					values: [],
-					event: []
+					
 				}
 				if(_this.id === "login"){
 
 					for(let i = 0; i < input.length; i++){
 						if(input[i].value == ""){
-							console.log('login');
+							
 							data.errors.push(input[i].name.toUpperCase() + " " + "field is required.")
 						}
 						if(input[i].name == 'email'){
@@ -138,7 +142,7 @@ var forms = (function(){
 				_this.id == "register" ? formData.append("profileimage", input[5].files[0]) : 'No file field'
 				getData(formData)
 			}
-		}) //submit function
+		}); //submit function
 	};
 	
 })();
@@ -149,15 +153,11 @@ function animateErrors(timestamp, e, queryErrors, errorDivs ){
 	var elemHeight = queryErrors.errorHeight + queryErrors.newHeight
 	var runtime = timestamp - start
 	var progress = Math.min(runtime / 300, 1).toFixed(1)
-	console.log(progress);
-	if(e.target.id ==="register")  divOpen(progress, queryErrors, elemHeight)
-	
-	
-	if(e.target.id === "register-close"){
-	 divClose(progress, queryErrors, errorDivs, elemHeight)
-	 }
+
+	if(e.target.id ==="register" || e.target.id === "login")  divOpen(progress, queryErrors, elemHeight)
+	else if(e.target.id === "register-close" || e.target.id === "login-close")  divClose(progress, queryErrors, errorDivs, elemHeight)
+
 	if(progress < 1){
-		
 		frameId = requestAnimationFrame(function(timestamp){
 			animateErrors(timestamp, e, queryErrors, errorDivs)
 		})
@@ -165,18 +165,16 @@ function animateErrors(timestamp, e, queryErrors, errorDivs ){
 }
 
 function divOpen(progress, queryErrors, elemHeight){
-	console.log(progress)
+	
 	var height = queryErrors.errorElem.style.height = elemHeight * progress + "px"
-	console.log(height);
+	
 }
 
 function divClose(progress, queryErrors, errorDivs, elemHeight){
-	console.log('close');
-	// var elemHeight = queryErrors.errorHeight + queryErrors.newHeight
-	console.log(elemHeight);
-	queryErrors.errorElem.style.height = elemHeight -  ( elemHeight * progress ) + "px"
+	var height = queryErrors.errorElem.style.height = elemHeight -  ( elemHeight * progress ) + "px"
+	console.log(height);
 	if(progress == 1) {
-				queryErrors.errorButton.style.display = "none"
+		queryErrors.errorButton.style.display = "none"
 		for(var i = 0; i < errorDivs.length; i++){
 			
 			errorDivs[i].remove()

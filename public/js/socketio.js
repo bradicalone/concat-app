@@ -19,7 +19,7 @@ document.getElementById('error').innerText += '\n' + error
 	}
 	})
 	
-
+  console.log('newMessage', message);
 
 
 socket.on('disconnect', ()=>{

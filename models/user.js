@@ -1,33 +1,38 @@
-var mongoose = require('mongoose');
+// // var mongoose = require('mongoose');
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/Concat');
-if(mongoose.connection.readyState == 2){
-	console.log("Connected to MongoDB server")
-};
+// // mongoose.Promise = global.Promise;
+// // mongoose.connect('mongodb://localhost:27017/Concat');
+// // if(mongoose.connection.readyState == 2){
+// // 	console.log("Connected to MongoDB server")
+// // };
 
 
-var User = mongoose.model('User', {
-  username: {
-    type: String,
-    index: true
-  },
-  password: {
-  	type: String
-  },
-  email: {
-  	type: String
-  },
-  name: {
-  	type: String
-  },
-  profileimage: {
-  	type: String
-  }
-});
+// var User = mongoose.model('User', {
+//   username: {
+//     type: String,
+//     index: true
+//   },
+//   password: {
+//   	type: String
+//   },
+//   email: {
+//   	type: String
+//   },
+//   name: {
+//   	type: String
+//   },
+//   profileimage: {
+//   	type: String
+//   }
+// });
 
-// module.exports = {mongoose};
-module.exports = {User}  
+
+// var createUser = (newUser, callback) =>{
+// 	newUser.save(callback)
+// }
+// // module.exports = {mongoose};
+// module.exports = {User, createUser}  
+
 // MongoClient.connect('mongodb://localhost:27017/Concat', (err, client) => {
 // 	if(err){
 // 	return	console.log('Unable to Connect to MongoDB Server')
