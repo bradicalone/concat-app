@@ -1,37 +1,38 @@
-// // var mongoose = require('mongoose');
+ var mongoose = require('mongoose');
 
-// // mongoose.Promise = global.Promise;
-// // mongoose.connect('mongodb://localhost:27017/Concat');
-// // if(mongoose.connection.readyState == 2){
-// // 	console.log("Connected to MongoDB server")
-// // };
-
-
-// var User = mongoose.model('User', {
-//   username: {
-//     type: String,
-//     index: true
-//   },
-//   password: {
-//   	type: String
-//   },
-//   email: {
-//   	type: String
-//   },
-//   name: {
-//   	type: String
-//   },
-//   profileimage: {
-//   	type: String
-//   }
-// });
+ mongoose.Promise = global.Promise;
+ // mongoose.connect('mongodb://ec2-user@ip-10-0-2-33/Concat');
+ mongoose.connect('mongodb://localhost:27017/Concat');
+ if(mongoose.connection.readyState == 2){
+ 	console.log("Connected to MongoDB server")
+ };
 
 
-// var createUser = (newUser, callback) =>{
-// 	newUser.save(callback)
-// }
-// // module.exports = {mongoose};
-// module.exports = {User, createUser}  
+var User = mongoose.model('User', {
+  username: {
+    type: String,
+    index: true
+  },
+  password: {
+  	type: String
+  },
+  email: {
+  	type: String
+  },
+  name: {
+  	type: String
+  },
+  profileimage: {
+  	type: String
+  }
+});
+
+
+var createUser = (newUser, callback) =>{
+	newUser.save(callback)
+}
+// module.exports = {mongoose};
+module.exports = {User, createUser}  
 
 // MongoClient.connect('mongodb://localhost:27017/Concat', (err, client) => {
 // 	if(err){
