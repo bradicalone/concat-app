@@ -1,7 +1,7 @@
  var mongoose = require('mongoose');
 
  mongoose.Promise = global.Promise;
- mongoose.connect('mongodb://ec2-user@ip-10-0-2-33/Concat');
+ 
  // mongoose.connect('mongodb://localhost:27017/Concat');
  if(mongoose.connection.readyState == 2){
  	console.log("Connected to MongoDB server")
